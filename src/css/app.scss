@@ -1,0 +1,606 @@
+// Custom Google Fonts import
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+// Global Font Setup
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.body--dark {
+  background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.15), transparent 40%),
+              radial-gradient(circle at bottom left, rgba(244, 63, 94, 0.1), transparent 45%),
+              #020617;
+  color: #f1f5f9;
+}
+
+body.body--light {
+  background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 40%),
+              radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05), transparent 45%),
+              #f8fafc;
+  color: #1e293b;
+}
+
+h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+// Responsive App Containers (Supporting Tablet & Desktop)
+.app-container {
+  max-width: 700px;
+  transition: all 0.3s ease;
+  
+  @media (min-width: 900px) {
+    max-width: 1000px;
+  }
+}
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  
+  @media (min-width: 900px) {
+    grid-template-columns: 1.5fr 1fr; // Tablet landscape / Desktop layout split
+    align-items: start;
+    gap: 24px;
+  }
+}
+
+// Glassmorphism Card Style
+.glass-card {
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-style: solid;
+  border-width: 1px;
+
+  body.body--dark & {
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  body.body--light & {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-color: rgba(30, 41, 59, 0.08);
+  }
+}
+
+// Specific card layouts
+.letters-grid-card {
+  body.body--dark & {
+    background: rgba(15, 23, 42, 0.45);
+  }
+  body.body--light & {
+    background: rgba(255, 255, 255, 0.55);
+  }
+}
+
+// Results Card Outer styling wrapper for 2-column view
+.results-glass-card {
+  @media (min-width: 900px) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+// Name Input Field Custom CSS
+.premium-input {
+  .q-field__control {
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+    
+    body.body--dark & {
+      background: rgba(15, 23, 42, 0.6) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      &:hover {
+        border-color: rgba(16, 185, 129, 0.5) !important;
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+      }
+    }
+    
+    body.body--light & {
+      background: rgba(255, 255, 255, 0.9) !important;
+      border-color: rgba(30, 41, 59, 0.15) !important;
+      &:hover {
+        border-color: rgba(16, 185, 129, 0.5) !important;
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.08);
+      }
+    }
+
+    &:before, &:after {
+      display: none !important; // Hide standard bottom lines
+    }
+  }
+
+  &.q-field--focused .q-field__control {
+    border-color: #10b981 !important;
+    body.body--dark & {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3) !important;
+    }
+    body.body--light & {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.12) !important;
+    }
+  }
+
+  .q-field__native, .q-field__prefix, .q-field__suffix, .q-field__input {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    body.body--dark & {
+      color: #fff !important;
+    }
+    body.body--light & {
+      color: #1e293b !important;
+    }
+  }
+
+  .q-placeholder {
+    body.body--dark & {
+      color: #94a3b8 !important;
+    }
+    body.body--light & {
+      color: #64748b !important;
+    }
+  }
+}
+
+// DOB summary layout
+.dob-summary-card {
+  .text-glow-primary {
+    font-weight: 600;
+    body.body--dark & {
+      color: #e2e8f0;
+    }
+    body.body--light & {
+      color: #334155;
+    }
+  }
+}
+
+.dob-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.dob-stat-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.dob-stat-title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.dob-stat-formula {
+  font-size: 0.8rem;
+  font-family: 'Plus Jakarta Sans', monospace;
+  margin-top: 2px;
+}
+
+.enemy-row {
+  body.body--dark & {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  body.body--light & {
+    border-top: 1px solid rgba(30, 41, 59, 0.08);
+  }
+}
+
+.enemy-circle {
+  border-color: #64748b !important;
+  color: #64748b !important;
+  text-shadow: none !important;
+
+  &.has-enemy {
+    border-color: #f43f5e !important;
+    color: #f43f5e !important;
+    text-shadow: 0 0 6px rgba(244, 63, 94, 0.4) !important;
+  }
+}
+
+// Word Rows and Letter Cards Layout
+.word-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+// Letter Cards Styling (Exactly like User's Image, but Premiumized)
+.letter-card {
+  width: 72px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  user-select: none;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  cursor: default; // Clicking is disabled
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  // Divider lines inside the card
+  .card-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      
+      body.body--dark & {
+        background: rgba(255, 255, 255, 0.08);
+      }
+      body.body--light & {
+        background: rgba(30, 41, 59, 0.08);
+      }
+    }
+  }
+
+  // Top Section: Letter
+  .letter-char {
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  // Method values (Unified Standard Styling - No Blue/Red)
+  .method-val {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    
+    .method-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      
+      body.body--dark & {
+        color: #94a3b8;
+      }
+      body.body--light & {
+        color: #64748b;
+      }
+    }
+
+    .method-number {
+      font-weight: 700;
+      
+      body.body--dark & {
+        color: #e2e8f0;
+      }
+      body.body--light & {
+        color: #334155;
+      }
+    }
+  }
+
+  // Vowel vs Consonant State Styling
+  &.state-vowel {
+    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15);
+    
+    body.body--dark & {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(15, 23, 42, 0.9));
+    }
+    body.body--light & {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(255, 255, 255, 0.95));
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    
+    .letter-char {
+      color: #10b981;
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+    
+    // Top border accent for Vowel
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #10b981;
+    }
+  }
+
+  &.state-consonant {
+    body.body--dark & {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+      border-color: rgba(255, 255, 255, 0.08);
+      .letter-char {
+        color: #ffffff;
+      }
+    }
+    body.body--light & {
+      background: linear-gradient(135deg, rgba(241, 245, 249, 0.95), rgba(226, 232, 240, 0.95));
+      border-color: rgba(30, 41, 59, 0.1);
+      .letter-char {
+        color: #1e293b;
+      }
+    }
+    
+    // Top border accent for Consonant
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #475569;
+    }
+  }
+
+  &.state-number {
+    border-color: rgba(245, 158, 11, 0.4);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+
+    body.body--dark & {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(15, 23, 42, 0.9));
+      .letter-char {
+        color: #f59e0b;
+        text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+      }
+    }
+    body.body--light & {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(255, 255, 255, 0.95));
+      border-color: rgba(245, 158, 11, 0.3);
+      .letter-char {
+        color: #d97706;
+      }
+    }
+
+    // Top border accent for Number
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #f59e0b;
+    }
+  }
+}
+
+// Summary Calculation Cards (Bottom Table style)
+.results-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+  border-radius: 0 0 16px 16px;
+
+  body.body--dark & {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.4);
+  }
+  body.body--light & {
+    border-top: 1px solid rgba(30, 41, 59, 0.08);
+    background: rgba(241, 245, 249, 0.5);
+  }
+
+  // Tablet landscape sidebar style: stack columns vertically!
+  @media (min-width: 900px) {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    border-radius: 16px;
+    border-top: none;
+    gap: 1px;
+    
+    body.body--dark & {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    body.body--light & {
+      background: rgba(30, 41, 59, 0.05);
+    }
+  }
+}
+
+.result-column {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+
+  // Horizontal divider on desktop/tablet portrait, phone landscape
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    
+    body.body--dark & {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    body.body--light & {
+      background: rgba(30, 41, 59, 0.08);
+    }
+
+    @media (max-width: 600px) {
+      display: none;
+    }
+
+    @media (min-width: 900px) {
+      display: none; // Stacked card style doesn't need borders
+    }
+  }
+
+  // Large screens (tablet/desktop) card style
+  @media (min-width: 900px) {
+    border-radius: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+    padding: 20px 16px;
+    
+    body.body--dark & {
+      background: rgba(15, 23, 42, 0.55);
+    }
+    body.body--light & {
+      background: rgba(255, 255, 255, 0.7);
+      border-color: rgba(30, 41, 59, 0.08) !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 16px;
+    body.body--dark & {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    body.body--light & {
+      background: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  .col-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    body.body--dark & {
+      color: #e2e8f0;
+    }
+    body.body--light & {
+      color: #334155;
+    }
+  }
+
+  .col-count {
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    font-weight: 500;
+    
+    body.body--dark & {
+      color: #94a3b8;
+    }
+    body.body--light & {
+      color: #64748b;
+    }
+  }
+
+  // Value Display Area
+  .system-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    margin-bottom: 12px;
+
+    .system-label {
+      font-size: 0.85rem;
+      width: 80px;
+      text-align: right;
+      body.body--dark & {
+        color: #94a3b8;
+      }
+      body.body--light & {
+        color: #64748b;
+      }
+    }
+
+    .system-sum {
+      font-size: 1.5rem;
+      font-weight: 700;
+      min-width: 40px;
+      text-align: left;
+      body.body--dark & {
+        color: #f59e0b;
+      }
+      body.body--light & {
+        color: #d97706;
+      }
+    }
+  }
+}
+
+// Global Number Circle Badge
+.num-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-width: 2px;
+  border-style: solid;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-color: #10b981;
+  color: #10b981;
+  text-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+  transition: all 0.3s ease;
+}
+
+// Scrollbar Theme
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.3);
+  border-radius: 4px;
+  &:hover {
+    background: rgba(16, 185, 129, 0.5);
+  }
+}
