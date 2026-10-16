@@ -2,13 +2,13 @@
   <q-page class="q-pa-md flex flex-center" style="min-height: 100vh;">
     <div class="full-width app-container">
       
-      <!-- Premium App Header -->
-      <div class="text-center q-mb-lg header-spacing">
-        <div class="row justify-center items-center q-gutter-sm">
-          <q-icon name="auto_awesome" size="36px" color="primary" />
+      <!-- App Header: Compact on mobile, hero on desktop -->
+      <div class="text-center q-mb-sm header-spacing">
+        <div class="gt-xs row justify-center items-center q-gutter-xs q-mb-xs">
+          <q-icon name="auto_awesome" size="28px" color="primary" />
           <h1 class="text-h4 text-weight-bold q-my-none text-glow">Numerology Calculator</h1>
         </div>
-        <p class="text-subtitle2 text-grey-5 q-mt-sm">
+        <p class="text-caption text-grey-5 q-my-none">
           Chaldean &amp; Pythagorean System
         </p>
       </div>
@@ -19,8 +19,8 @@
         <!-- Left Section (Inputs & Grid) -->
         <div class="left-section">
           <!-- Inputs Card (Name & DOB side-by-side) -->
-          <div class="glass-card q-pa-lg q-mb-md">
-            <div class="row q-col-gutter-md">
+          <div class="glass-card q-pa-sm q-pa-sm-md q-mb-sm">
+            <div class="row q-col-gutter-sm">
               <div class="col-12 col-sm-6">
                 <q-input
                   v-model="nameInput"
@@ -69,25 +69,29 @@
               </div>
             </div>
             
-            <div class="text-caption text-grey-5 q-mt-md text-center flex items-center justify-center q-gutter-md">
+            <div class="text-caption text-grey-5 q-mt-xs text-center flex items-center justify-center q-gutter-sm legend-row">
               <span class="flex items-center"><span class="vowel-dot q-mr-xs"></span> Vowel</span>
               <span class="flex items-center"><span class="consonant-dot q-mr-xs"></span> Consonant</span>
               <span class="flex items-center"><span class="number-dot q-mr-xs"></span> Number</span>
             </div>
           </div>
 
-          <!-- Letters Grid Card -->
-          <div class="glass-card q-pa-lg q-mb-md letters-grid-card" style="min-height: 200px; display: flex; flex-direction: column; justify-content: center;">
-            <div v-if="nameInput.trim() === ''" class="text-center text-grey-6 py-lg">
-              <q-icon name="fingerprint" size="64px" class="q-mb-md text-primary" />
-              <div class="text-h6 text-weight-medium">Your Grid Awaits</div>
-              <p class="text-body2 text-grey-6 max-width-sm q-mx-auto">
-                Type a name or number in the input box above to reveal its numerological numbers and vibrational grid.
+          <!-- Letters Grid Card: Horizontal Flow -->
+          <div class="glass-card q-pa-sm q-pa-sm-md q-mb-sm letters-grid-card">
+            <div v-if="nameInput.trim() === ''" class="text-center text-grey-6 py-md">
+              <q-icon name="fingerprint" size="44px" class="q-mb-xs text-primary" />
+              <div class="text-subtitle1 text-weight-medium">Your Grid Awaits</div>
+              <p class="text-caption text-grey-6 max-width-sm q-mx-auto q-mb-none">
+                Type a name or number in the input box above to reveal its vibrational grid.
               </p>
             </div>
 
-            <div v-else>
-              <div v-for="(word, wordIndex) in words" :key="wordIndex" class="word-row">
+            <div v-else class="letters-flow-container">
+              <div
+                v-for="(word, wordIndex) in words"
+                :key="wordIndex"
+                class="word-group"
+              >
                 <div
                   v-for="(item, itemIndex) in word"
                   :key="itemIndex"
@@ -115,45 +119,41 @@
         <!-- Right Section (Calculations Summary) -->
         <div class="right-section">
           
-          <!-- DOB Results Card (Shown only if complete DOB is entered) -->
-          <div v-if="isDobComplete" class="glass-card q-pa-lg q-mb-md dob-summary-card">
-            <div class="text-h6 text-weight-bold text-primary q-mb-md flex items-center">
-              <q-icon name="insights" size="24px" class="q-mr-xs" />
+          <!-- DOB Results Card: 3 Horizontal Columns -->
+          <div v-if="isDobComplete" class="glass-card q-pa-sm q-pa-sm-md q-mb-sm dob-summary-card">
+            <div class="text-subtitle2 text-weight-bold text-primary q-mb-xs flex items-center justify-center">
+              <q-icon name="insights" size="18px" class="q-mr-xs" />
               Birth &amp; Destiny Numbers
             </div>
             
-            <!-- Birth Number Row -->
-            <div class="dob-stat-row q-mb-md">
-              <div class="dob-stat-info">
-                <div class="dob-stat-title text-glow-primary">Birth Number</div>
+            <div class="dob-stats-grid">
+              <!-- Birth Number -->
+              <div class="dob-stat-item">
+                <div class="dob-stat-title text-glow-primary">Birth No.</div>
+                <div class="num-circle dob-circle">{{ birthCalc.val }}</div>
                 <div class="dob-stat-formula text-grey-5">{{ birthCalc.formula }}</div>
               </div>
-              <div class="num-circle dob-circle">{{ birthCalc.val }}</div>
-            </div>
-            
-            <!-- Destiny Number Row -->
-            <div class="dob-stat-row q-mb-md">
-              <div class="dob-stat-info">
-                <div class="dob-stat-title text-glow-primary">Destiny Number</div>
+              
+              <!-- Destiny Number -->
+              <div class="dob-stat-item">
+                <div class="dob-stat-title text-glow-primary">Destiny No.</div>
+                <div class="num-circle dob-circle">{{ destinyCalc.val }}</div>
                 <div class="dob-stat-formula text-grey-5">{{ destinyCalc.formula }}</div>
               </div>
-              <div class="num-circle dob-circle">{{ destinyCalc.val }}</div>
-            </div>
 
-            <!-- Enemy Number Row -->
-            <div class="dob-stat-row enemy-row q-pt-md">
-              <div class="dob-stat-info">
-                <div class="dob-stat-title text-rose-4">Enemy Number</div>
-                <div class="dob-stat-formula text-grey-5">Based on Birth / Destiny</div>
-              </div>
-              <div class="num-circle dob-circle enemy-circle" :class="enemyCalc.val !== 'None' ? 'has-enemy' : ''">
-                {{ enemyCalc.val }}
+              <!-- Enemy Number -->
+              <div class="dob-stat-item enemy-item">
+                <div class="dob-stat-title text-rose-4">Enemy No.</div>
+                <div class="num-circle dob-circle enemy-circle" :class="enemyCalc.val !== 'None' ? 'has-enemy' : ''">
+                  {{ enemyCalc.val }}
+                </div>
+                <div class="dob-stat-formula text-grey-5">{{ enemyCalc.val !== 'None' ? 'Avoid' : 'None' }}</div>
               </div>
             </div>
           </div>
 
-          <!-- Name Calculation Cards -->
-          <div class="glass-card overflow-hidden results-glass-card">
+          <!-- Name Calculation Cards: 3 Horizontal Columns Always -->
+          <div class="glass-card overflow-hidden results-glass-card q-mb-sm">
             <div class="results-container">
               
               <!-- Column 1: Total (Expression) -->
@@ -163,14 +163,14 @@
                 
                 <!-- Chaldean Row -->
                 <div class="system-row">
-                  <div class="system-label">Chaldean</div>
+                  <div class="system-label"><span class="full-label">Chaldean</span><span class="short-label">C:</span></div>
                   <div class="system-sum">{{ stats.total.chaldean }}</div>
                   <div class="num-circle">{{ stats.total.chaldeanReduced.display }}</div>
                 </div>
                 
                 <!-- Pythagorean Row -->
                 <div class="system-row">
-                  <div class="system-label">Pythagorean</div>
+                  <div class="system-label"><span class="full-label">Pythagorean</span><span class="short-label">P:</span></div>
                   <div class="system-sum">{{ stats.total.pythagorean }}</div>
                   <div class="num-circle">{{ stats.total.pythagoreanReduced.display }}</div>
                 </div>
@@ -183,14 +183,14 @@
                 
                 <!-- Chaldean Row -->
                 <div class="system-row">
-                  <div class="system-label">Chaldean</div>
+                  <div class="system-label"><span class="full-label">Chaldean</span><span class="short-label">C:</span></div>
                   <div class="system-sum">{{ stats.vowels.chaldean }}</div>
                   <div class="num-circle">{{ stats.vowels.chaldeanReduced.display }}</div>
                 </div>
                 
                 <!-- Pythagorean Row -->
                 <div class="system-row">
-                  <div class="system-label">Pythagorean</div>
+                  <div class="system-label"><span class="full-label">Pythagorean</span><span class="short-label">P:</span></div>
                   <div class="system-sum">{{ stats.vowels.pythagorean }}</div>
                   <div class="num-circle">{{ stats.vowels.pythagoreanReduced.display }}</div>
                 </div>
@@ -203,14 +203,14 @@
                 
                 <!-- Chaldean Row -->
                 <div class="system-row">
-                  <div class="system-label">Chaldean</div>
+                  <div class="system-label"><span class="full-label">Chaldean</span><span class="short-label">C:</span></div>
                   <div class="system-sum">{{ stats.consonants.chaldean }}</div>
                   <div class="num-circle">{{ stats.consonants.chaldeanReduced.display }}</div>
                 </div>
                 
                 <!-- Pythagorean Row -->
                 <div class="system-row">
-                  <div class="system-label">Pythagorean</div>
+                  <div class="system-label"><span class="full-label">Pythagorean</span><span class="short-label">P:</span></div>
                   <div class="system-sum">{{ stats.consonants.pythagorean }}</div>
                   <div class="num-circle">{{ stats.consonants.pythagoreanReduced.display }}</div>
                 </div>
@@ -223,8 +223,8 @@
       </div>
 
       <!-- App Footer / Brand Info -->
-      <div class="text-center text-grey-7 text-caption q-mt-xl q-mb-md">
-        Numerology Calculator • Offline Local Execution
+      <div class="text-center text-grey-7 text-caption q-mt-xs q-mb-xs">
+        Numerology Calculator • Offline
       </div>
 
     </div>

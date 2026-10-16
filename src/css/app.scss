@@ -28,11 +28,17 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
   letter-spacing: -0.02em;
 }
 
-// Responsive App Containers (Supporting Tablet & Desktop)
+// Responsive App Containers (Supporting Mobile, Tablet & Desktop)
 .app-container {
   max-width: 700px;
+  width: 100%;
+  padding: 0 4px;
   transition: all 0.3s ease;
   
+  @media (min-width: 600px) {
+    padding: 0 12px;
+  }
+
   @media (min-width: 900px) {
     max-width: 1000px;
   }
@@ -41,12 +47,12 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
 .responsive-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 10px;
   
   @media (min-width: 900px) {
-    grid-template-columns: 1.5fr 1fr; // Tablet landscape / Desktop layout split
+    grid-template-columns: 1.4fr 1fr; // Tablet landscape / Desktop layout split
     align-items: start;
-    gap: 24px;
+    gap: 18px;
   }
 }
 
@@ -158,7 +164,7 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
   }
 }
 
-// DOB summary layout
+// DOB summary layout - 3 Horizontal Columns
 .dob-summary-card {
   .text-glow-primary {
     font-weight: 600;
@@ -171,38 +177,47 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
   }
 }
 
-.dob-stat-row {
-  display: flex;
-  justify-content: space-between;
+.dob-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
   align-items: center;
-  width: 100%;
+  text-align: center;
 }
 
-.dob-stat-info {
+.dob-stat-item {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
+  align-items: center;
+  justify-content: center;
+  padding: 6px 2px;
 
-.dob-stat-title {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.dob-stat-formula {
-  font-size: 0.8rem;
-  font-family: 'Plus Jakarta Sans', monospace;
-  margin-top: 2px;
-}
-
-.enemy-row {
-  body.body--dark & {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  .dob-stat-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    @media (min-width: 600px) {
+      font-size: 0.92rem;
+    }
   }
-  body.body--light & {
-    border-top: 1px solid rgba(30, 41, 59, 0.08);
+
+  .dob-circle {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+    margin: 4px 0;
+    @media (min-width: 600px) {
+      width: 40px;
+      height: 40px;
+      font-size: 1.15rem;
+    }
+  }
+
+  .dob-stat-formula {
+    font-size: 0.7rem;
+    font-family: 'Plus Jakarta Sans', monospace;
+    opacity: 0.8;
+    white-space: nowrap;
   }
 }
 
@@ -218,34 +233,51 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
   }
 }
 
-// Word Rows and Letter Cards Layout
-.word-row {
+// Letters Flow Container & Word Groups (Horizontal Order, Compact)
+.letters-flow-container {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px 14px;
+  width: 100%;
 }
 
-// Letter Cards Styling (Exactly like User's Image, but Premiumized)
+.word-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  margin: 2px 0;
+}
+
+// Letter Cards Styling (Compact, Horizontal-friendly, Minimal Vertical Scrolling)
 .letter-card {
-  width: 72px;
-  height: 120px;
+  width: 48px;
+  height: 80px;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
+  border-radius: 9px;
   overflow: hidden;
   user-select: none;
   border-style: solid;
   border-width: 1px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
-  cursor: default; // Clicking is disabled
+  cursor: default;
+
+  @media (min-width: 600px) {
+    width: 60px;
+    height: 96px;
+    border-radius: 11px;
+  }
 
   &:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    transform: scale(1.04);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
   }
 
   // Divider lines inside the card
@@ -255,7 +287,6 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    font-size: 1rem;
     position: relative;
 
     &:not(:last-child)::after {
@@ -277,23 +308,27 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
 
   // Top Section: Letter
   .letter-char {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     font-weight: 700;
     font-family: 'Outfit', sans-serif;
+    
+    @media (min-width: 600px) {
+      font-size: 1.3rem;
+    }
   }
 
-  // Method values (Unified Standard Styling - No Blue/Red)
+  // Method values
   .method-val {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 3px;
     font-family: 'Outfit', sans-serif;
-    font-size: 1rem;
     
     .method-label {
-      font-size: 0.75rem;
-      font-weight: 500;
+      font-size: 0.68rem;
+      font-weight: 600;
+      opacity: 0.75;
       
       body.body--dark & {
         color: #94a3b8;
@@ -301,10 +336,15 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
       body.body--light & {
         color: #64748b;
       }
+      
+      @media (min-width: 600px) {
+        font-size: 0.75rem;
+      }
     }
 
     .method-number {
       font-weight: 700;
+      font-size: 0.82rem;
       
       body.body--dark & {
         color: #e2e8f0;
@@ -312,13 +352,17 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
       body.body--light & {
         color: #334155;
       }
+
+      @media (min-width: 600px) {
+        font-size: 0.95rem;
+      }
     }
   }
 
   // Vowel vs Consonant State Styling
   &.state-vowel {
     border-color: rgba(16, 185, 129, 0.4);
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15);
+    box-shadow: 0 3px 12px rgba(16, 185, 129, 0.15);
     
     body.body--dark & {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(15, 23, 42, 0.9));
@@ -330,10 +374,9 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
     
     .letter-char {
       color: #10b981;
-      text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+      text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
     }
     
-    // Top border accent for Vowel
     &::before {
       content: '';
       position: absolute;
@@ -361,7 +404,6 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
       }
     }
     
-    // Top border accent for Consonant
     &::before {
       content: '';
       position: absolute;
@@ -375,13 +417,13 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
 
   &.state-number {
     border-color: rgba(245, 158, 11, 0.4);
-    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+    box-shadow: 0 3px 12px rgba(245, 158, 11, 0.15);
 
     body.body--dark & {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(15, 23, 42, 0.9));
       .letter-char {
         color: #f59e0b;
-        text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+        text-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
       }
     }
     body.body--light & {
@@ -392,7 +434,6 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
       }
     }
 
-    // Top border accent for Number
     &::before {
       content: '';
       position: absolute;
@@ -405,48 +446,34 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
   }
 }
 
-// Summary Calculation Cards (Bottom Table style)
+// Summary Calculation Cards - Always 3 Horizontal Columns to Reduce Vertical Scrolling
 .results-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr) !important;
   overflow: hidden;
-  border-radius: 0 0 16px 16px;
+  border-radius: 14px;
 
   body.body--dark & {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(15, 23, 42, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 23, 42, 0.45);
   }
   body.body--light & {
     border-top: 1px solid rgba(30, 41, 59, 0.08);
-    background: rgba(241, 245, 249, 0.5);
+    background: rgba(241, 245, 249, 0.6);
   }
 
-  // Tablet landscape sidebar style: stack columns vertically!
+  // Tablet landscape sidebar style: stack cards in the right sidebar
   @media (min-width: 900px) {
     grid-template-columns: 1fr !important;
-    gap: 16px !important;
+    gap: 12px !important;
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
   }
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-    border-radius: 16px;
-    border-top: none;
-    gap: 1px;
-    
-    body.body--dark & {
-      background: rgba(255, 255, 255, 0.05);
-    }
-    body.body--light & {
-      background: rgba(30, 41, 59, 0.05);
-    }
-  }
 }
 
 .result-column {
-  padding: 24px 16px;
+  padding: 10px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -454,28 +481,28 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
   position: relative;
   transition: all 0.3s ease;
 
-  // Horizontal divider on desktop/tablet portrait, phone landscape
+  @media (min-width: 600px) {
+    padding: 16px 12px;
+  }
+
+  // Vertical divider between columns
   &:not(:last-child)::after {
     content: '';
     position: absolute;
     right: 0;
-    top: 20%;
-    height: 60%;
+    top: 15%;
+    height: 70%;
     width: 1px;
     
     body.body--dark & {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
     }
     body.body--light & {
       background: rgba(30, 41, 59, 0.08);
     }
 
-    @media (max-width: 600px) {
-      display: none;
-    }
-
     @media (min-width: 900px) {
-      display: none; // Stacked card style doesn't need borders
+      display: none;
     }
   }
 
@@ -484,7 +511,7 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
     border-radius: 16px !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
-    padding: 20px 16px;
+    padding: 16px 14px;
     
     body.body--dark & {
       background: rgba(15, 23, 42, 0.55);
@@ -496,20 +523,10 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
     }
   }
 
-  @media (max-width: 600px) {
-    padding: 16px;
-    body.body--dark & {
-      background: rgba(15, 23, 42, 0.6);
-    }
-    body.body--light & {
-      background: rgba(255, 255, 255, 0.9);
-    }
-  }
-
   .col-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 2px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     body.body--dark & {
@@ -518,18 +535,28 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
     body.body--light & {
       color: #334155;
     }
+    @media (min-width: 600px) {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
   }
 
   .col-count {
-    font-size: 0.85rem;
-    margin-bottom: 16px;
+    font-size: 0.68rem;
+    margin-bottom: 8px;
     font-weight: 500;
+    white-space: nowrap;
     
     body.body--dark & {
       color: #94a3b8;
     }
     body.body--light & {
       color: #64748b;
+    }
+
+    @media (min-width: 600px) {
+      font-size: 0.8rem;
+      margin-bottom: 12px;
     }
   }
 
@@ -538,13 +565,19 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 4px;
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
+
+    @media (min-width: 600px) {
+      gap: 10px;
+      margin-bottom: 10px;
+    }
 
     .system-label {
-      font-size: 0.85rem;
-      width: 80px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      width: auto;
       text-align: right;
       body.body--dark & {
         color: #94a3b8;
@@ -552,41 +585,87 @@ h1, h2, h3, h4, h5, h6, .text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-
       body.body--light & {
         color: #64748b;
       }
+      @media (min-width: 600px) {
+        font-size: 0.85rem;
+        width: 80px;
+      }
     }
 
     .system-sum {
-      font-size: 1.5rem;
+      font-size: 1.05rem;
       font-weight: 700;
-      min-width: 40px;
-      text-align: left;
+      min-width: unset;
+      text-align: center;
       body.body--dark & {
         color: #f59e0b;
       }
       body.body--light & {
         color: #d97706;
       }
+      @media (min-width: 600px) {
+        font-size: 1.4rem;
+        min-width: 36px;
+        text-align: left;
+      }
     }
+
+    .num-circle {
+      min-width: 30px;
+      width: auto;
+      height: 30px;
+      font-size: 0.82rem;
+      padding: 0 5px;
+      border-radius: 15px;
+      @media (min-width: 600px) {
+        min-width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
+        padding: 0 6px;
+        border-radius: 19px;
+      }
+    }
+  }
+}
+
+// Label responsive switch
+.full-label {
+  display: none;
+  @media (min-width: 600px) {
+    display: inline;
+  }
+}
+.short-label {
+  display: inline;
+  @media (min-width: 600px) {
+    display: none;
   }
 }
 
 // Global Number Circle Badge
 .num-circle {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   border-width: 2px;
   border-style: solid;
   background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
   border-color: #10b981;
   color: #10b981;
   text-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
   transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  @media (min-width: 600px) {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
 }
 
 // Scrollbar Theme
